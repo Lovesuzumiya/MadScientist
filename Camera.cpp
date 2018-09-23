@@ -1,5 +1,5 @@
 //About the "gray screen" problem,I asked my teacher and we make an conclusion that it has no matter with the code,but the camera.
-//We did a little experiment that open the camera first ,then ran the code.Expeted,the"gray screen" appeared.
+//We did a little experiment that opened the camera first ,then ran the code.Expectedly,the"gray screen" appeared.
 //Therefore,we think some app transfers my camera in unkowningly,which makes me uncomfortable.
 //So all above is nothing about my code,but keep an eye on your camera.
 #include "stdafx.h"
