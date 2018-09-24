@@ -73,8 +73,10 @@ int main()
 void on_Trackbar(int,void*)
 {
 	cout << "Threshold value: " << endl;
-	cout << "Threshold" << Threshold << endl;//assign the value on trackbar to 'Threshold'.
+	cout << "Threshold = " << Threshold << endl;
+	threshold(grayImage, binary, Threshold, 255, CV_THRESH_BINARY);//Noticed that Threshold is a global assignment
 }
+
 
 void on_Mouse(int event, int x, int y, int flags, void*)
 {
