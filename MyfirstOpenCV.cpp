@@ -53,6 +53,7 @@ int main()
 	threshold(grayImage, binary, Threshold , 255, CV_THRESH_BINARY);//'255'means all pixel values are accepted.If you set it at 200,for example,the maxium pixel value will be 200.
 	
 	waitKey();
+	threshold(grayImage, binary, Threshold, 255, CV_THRESH_BINARY);//Noticed that Threshold is a global assignment
 	namedWindow("2B_Binary");
 	imshow("2B_Binary", binary);
 	imwrite("2B_Binary.png", binary);//we will use the mat binary later,so you have to save it now.
@@ -74,7 +75,6 @@ void on_Trackbar(int,void*)
 {
 	cout << "Threshold value: " << endl;
 	cout << "Threshold = " << Threshold << endl;
-	threshold(grayImage, binary, Threshold, 255, CV_THRESH_BINARY);//Noticed that Threshold is a global assignment
 }
 
 
