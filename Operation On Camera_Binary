@@ -1,7 +1,8 @@
 //If u have read the'Camera'and'MyFirstOpenCV',u have konw a little on how to transfer your camera and do a little procession on your images.
 //This code uses the same method to deal with your camera,so you can also get a threshold on the camera.Images captured are not so good-looking,though.
 //And i have trouble with how to save the video.and show the reversed bainary images.
-//If u have any idea,please mail me at 161513libohan@buaa.edu.cn.Thanks :>.
+//If u have any idea,please mail me at 161513libohan@buaa.edu.cn.Thanks :>.  --- 2018/9/23
+//I find out a way to reverse the binary,and i will post the latest one here.However i still don't konw how to save it :<. ---2018/9/28
 
 #include "stdafx.h"
 #include<opencv2/opencv.hpp>
@@ -10,6 +11,7 @@
 using namespace std;
 using namespace cv;
 
+VideoCapture capture(0);
 Mat frame;
 Mat grayImage;
 Mat binary;
@@ -21,9 +23,30 @@ void on_Trackbar(int, void*)
 	cout << "Threshold = " << Threshold << endl;
 }
 
+void on_Mouse(int event, int x, int y, int flags, void*)
+{
+	if (event == EVENT_LBUTTONUP)
+	{
+		cout << "To reverse" << endl;
+		while (true)
+		{
+			capture >> frame;
+			if (frame.empty())
+				break;
+			cvtColor(frame, grayImage, CV_BGR2GRAY);
+			threshold(grayImage, binary, Threshold, 255, CV_THRESH_BINARY);
+			bitwise_not(binary, rev);
+			imshow("Binary", rev);
+			if (waitKey(30)>=0)
+			{
+				break;
+			}
+		}
+	}
+}
+
 int main()
 {
-	VideoCapture capture(0);
 //
 //	if (!capture.isOpened())
 //	{
@@ -45,7 +68,9 @@ int main()
 		namedWindow("Binary");
 		createTrackbar("Threshold", "Binary", &Threshold, 255, on_Trackbar);
 		imshow("Binary", binary);
-		if (waitKey(30) >= 0)
+		setMouseCallback("16151065_Binary", on_Mouse);
+		//cv::waitKey(30);
+		if (cv::waitKey(30) >= 0)
 			break;
 		
 	}
